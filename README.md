@@ -20,4 +20,4 @@ and more...
 
 ## Game preview
 
-[[https://github.com/HylanSilva/the-office-memory-game/blob/main/dundermifllinggame.gif|alt=dundermifflinggamepreview]]
+![dundermifflinggame preview](https://github.com/HylanSilva/the-office-memory-game/blob/main/dundermifllinggame.gif)
