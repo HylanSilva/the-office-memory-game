@@ -1,0 +1,187 @@
+
+*{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(211, 211, 211);
+}
+
+/* header */
+.top-div h1{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.time{
+    left: 5vw;
+    top: 40vh;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-display{
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 270px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#time{
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    text-transform: uppercase;
+}
+/* BOTÕESS */
+.buttons{
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#btn-start{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    font-size: 24px;
+    height: 50px;
+    width: 90px;
+    background-color: rgb(108, 255, 108);
+    border: none;
+    cursor: pointer;
+}
+#btn-pause{
+    font-size: 24px;
+    height: 50px;
+    width: 90px;
+    background-color: rgb(129, 129, 255);
+    border: none;
+    cursor: pointer;
+}
+/* .check-reset{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    font-size: 24px;
+    height: 50px;
+    width: 90px;
+    background-color: rgb(255, 102, 102);
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+}   */
+
+    
+#btn-reset{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    font-size: 24px;
+    height: 50px;
+    width: 90px;
+    background-color: rgb(255, 102, 102);
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+
+/* game */
+
+.memory-game {
+    height: 90%;
+    width: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px; /* perspectiva do usuario no eixo z, quanto maior, maior o efeito da perspectiva */
+}
+
+.card {
+    height: calc( 33.333% - 10px);
+    width: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    cursor: pointer;
+    transform: scale(1);
+    transform-style: preserve-3d; /* adiciona perspectiva 3d, para que o elemento nao fique achatada no plano */
+    transition: transform .9s; /* adiciona efeito de movimento ao flip do card */
+}
+
+.card:active{
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: rgb(55, 56, 56);
+  backface-visibility: hidden; /* todo elemento tem uma frente e um verso (ao contrario, como um espelho.) essa propriedade retira o verso */
+}
+
+.card-front {
+    transform: rotateY(180deg); /* antes, o verso aparecia transparente, pois ambas as imagens tem position absolute, ao girar no eixo Y, elas ficaram com os versos virados */
+}
+
+/* flip card animation */
+
+.card.flip {
+    transform: rotateY(180deg);
+}
+
+/* footer */
+
+.footer{
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    width: 100vw;
+    background-color: grey;
+}
+
+footer p a{
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    color: white;
+}
+
+footer p {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+
