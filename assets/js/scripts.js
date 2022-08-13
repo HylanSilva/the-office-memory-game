@@ -16,44 +16,11 @@ window.onload = function () {
     var fimDeJogo = false;
 
 
-    //onClick do Botão Start
-    buttonStart.onclick = function () {
-        lockBoard = false;
-        clearInterval(interval);
-        interval = setInterval(startTime, 10);
-        document.getElementById('btn-reset').disabled = true;
-        document.getElementById('btn-pause').disabled = false;
-
-        // buttonPause.innerHTML = 'Pausar'
-        mecanicalShuffle();
-        console.log('O Jogo Startou');
-    }
-    //onClick do Botão Reiniciar
-    buttonReset.onclick = function () {
-        console.log('O Jogo Reinicou');
-        clearInterval(interval);
-        tens = "00";
-        seconds = "00";
-        appendTens.innerHTML = tens;
-        appendSeconds.innerHTML = seconds;
-        lockBoard = true;
-        // buttonPause.innerHTML = 'Pausar';
-        buttonStart.innerHTML = 'Start';
-        mecanicalShuffle();
-    }
-    //onClick do Botão Pause
-    buttonPause.onclick = function () {
-        clearInterval(interval);
-        lockBoard = true;
-        buttonStart.innerHTML = 'Continuar';
-        document.getElementById('btn-reset').disabled = false;
-
-    }
-
+    
     //função do temporizador
     function startTime() {
         tens++;
-
+        
         if (tens <= 9) {
             appendTens.innerHTML = "0" + tens;
         }
@@ -71,16 +38,19 @@ window.onload = function () {
             appendSeconds.innerHTML = seconds;
         }
     }
-
+    
     // O JOGO
-
-
-
+    
+    // função que desvira todas as cartas
+    function flipAllCards(){
+        console.log("virou todas as cartas")
+    }
+    
     //função para virar carta
     function flipCard() {
         if (lockBoard) return;
         if (this === firstCard) return;
-
+        
         this.classList.toggle('flip');
         if (!hasFlippedCard) {
             hasFlippedCard = true;
@@ -88,12 +58,12 @@ window.onload = function () {
             console.log('virou a carta');
             return;
         }
-
+        
         secondCard = this;
         hasFlippedCard = false;
         checkForMatch();
     }
-
+    
     //função que checa se as cartas são iguais
     function checkForMatch() {
         if (firstCard.dataset.card === secondCard.dataset.card) {
@@ -109,21 +79,35 @@ window.onload = function () {
                     lockBoard = true;
                     hasFlippedCard = false;
                     totalMatches = 0;
-                    enableCards()
+                    enableCards();
+                    flipAllCards();
                 }
                 return;
             }
-
+            
             return;
         }
-
+        
         unflipCards();
     }
+    //funcão que desvira as cartas
+    function unflipCards() {
+        lockBoard = true;
 
+        setTimeout(() => {
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip');
+
+        }, 500);
+        console.log('Desvirou a carta');
+    }
+    
     function enableCards() {
         firstCard.addEventListener('click', flipCard);
         secondCard.addEventListener('click', flipCard);
         console.log('Habilitou a carta');
+
+        resetBoard();
     }
 
     //função que desabilita as cartas
@@ -133,29 +117,18 @@ window.onload = function () {
         secondCard.removeEventListener('click', flipCard);
         console.log('Desabilitou a carta');
 
-        resetBoard();
+        
     }
 
-    //funcão que desvira as cartas
-    function unflipCards() {
-        lockBoard = true;
-
-        setTimeout(() => {
-            firstCard.classList.remove('flip');
-            secondCard.classList.remove('flip');
-
-            resetBoard();
-        }, 500);
-        console.log('Desvirou a carta');
-    }
-
+    
     //função que reseta o tabuleiro
     function resetBoard() {
         console.log('Resetou o tabuleiro');
         [hasFlippedCard, lockBoard] = [false, false];
         [firstCard, secondCard] = [null, null];
     }
-
+    
+    // função que embaralha o tabuleiro
     function mecanicalShuffle() {
         console.log('Embaralhou');
         cards.forEach((card) => {
@@ -165,7 +138,7 @@ window.onload = function () {
             flipCard();
         })
     }
-
+    
     //função que embaralha automaticamente as cartas
     (function shuffle() {
         console.log('Embaralhou');
@@ -180,6 +153,39 @@ window.onload = function () {
         card.addEventListener('click', flipCard);
         console.log('Cliquei na carta');
     });
+    //onClick do Botão Start
+    buttonStart.onclick = function () {
+        lockBoard = false;
+        clearInterval(interval);
+        interval = setInterval(startTime, 10);
+        document.getElementById('btn-reset').disabled = true;
+        document.getElementById('btn-pause').disabled = false;
+    
+        // buttonPause.innerHTML = 'Pausar'
+        Shuffle();
+        console.log('O Jogo Startou');
+    }
+    //onClick do Botão Reiniciar
+    buttonReset.onclick = function () {
+        console.log('O Jogo Reinicou');
+        clearInterval(interval);
+        tens = "00";
+        seconds = "00";
+        appendTens.innerHTML = tens;
+        appendSeconds.innerHTML = seconds;
+        lockBoard = true;
+        // buttonPause.innerHTML = 'Pausar';
+        buttonStart.innerHTML = 'Start';
+        Shuffle();
+    }
+    //onClick do Botão Pause
+    buttonPause.onclick = function () {
+        clearInterval(interval);
+        lockBoard = true;
+        buttonStart.innerHTML = 'Continuar';
+        document.getElementById('btn-reset').disabled = false;
+    
+    }
 }
 
 
